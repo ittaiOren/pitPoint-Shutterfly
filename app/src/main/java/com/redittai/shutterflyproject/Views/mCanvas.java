@@ -180,8 +180,8 @@ public class mCanvas extends View {
     @Nullable
     private pitPoint pickupPitPointFromGraph(float x, float y) {
         for (int i = 0 ; i < pitPoints.size() ; i++){
-            if (pitPoints.get(i).getxPoint() > x - 30 && pitPoints.get(i).getxPoint() < x + 30 && pitPoints.get(i).getyPoint()
-                    > y-30 && pitPoints.get(i).getyPoint() < y+30){
+            if (pitPoints.get(i).getxPoint() > x - 40 && pitPoints.get(i).getxPoint() < x + 40 && pitPoints.get(i).getyPoint()
+                    > y-40 && pitPoints.get(i).getyPoint() < y+40){
                 Log.i(tag,"found a pit point");
                 return pitPoints.get(i);
             }

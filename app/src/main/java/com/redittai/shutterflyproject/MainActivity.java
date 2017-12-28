@@ -6,10 +6,14 @@ import android.view.View;
 import android.widget.Button;
 
 import com.redittai.shutterflyproject.Models.pitPoint;
+import com.redittai.shutterflyproject.Views.mCanvas;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     Button addPit;
     View pit;
+    public static boolean IS_FIRST_ENTER = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,10 +21,14 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        pit = findViewById(R.id.view2);
+        pit = findViewById(R.id.CustomComponent);
         addPit = findViewById(R.id.addPitBTN);
         pit.getWidth();
         pit.getHeight();
+        if (IS_FIRST_ENTER){
+            initFirstPitPoints();
+            IS_FIRST_ENTER = false;
+        }
         addPit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,5 +52,19 @@ public class MainActivity extends AppCompatActivity {
         pit.invalidate();
     }
 
+    private void initFirstPitPoints() {
+        int step = 100;
+        for (int i = 0; i < 5; i++) {
+            Random r = new Random();
+            int x = r.nextInt(1000);
+            int y = r.nextInt(1080);
 
+            pitPoint p1 = new pitPoint(getApplicationContext(),x, y);
+
+
+            mCanvas.pitPoints.add(p1);
+
+        }
+
+    }
 }
