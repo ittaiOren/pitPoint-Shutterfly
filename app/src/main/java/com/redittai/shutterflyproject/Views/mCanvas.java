@@ -5,24 +5,20 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.media.MediaPlayer;
-import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.redittai.shutterflyproject.Models.pitPoint;
-import com.redittai.shutterflyproject.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 /**
- * Created by redittai on 27/12/2017.
+ * Created by Ittai Oren on 27/12/2017.
  */
 
 public class mCanvas extends View {
@@ -35,11 +31,10 @@ public class mCanvas extends View {
    Paint black, red , blue;
 
 
-    public mCanvas(Context context, float screenWidth) {
+    public mCanvas(Context context) {
         super(context);
         init(null);
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenWidth;
+
     }
 
 
@@ -54,14 +49,11 @@ public class mCanvas extends View {
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public mCanvas(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(attrs);
-    }
+
     // init all paints and rects
     private void init(@Nullable AttributeSet attrs){
         //black for grph grid
+
         black = new Paint();
         black.setColor(Color.GRAY);
         black.setStyle(Paint.Style.STROKE);
@@ -110,12 +102,12 @@ public class mCanvas extends View {
 
     }
 
-    public void createNewPitPoint(){
-
-        pitPoints.add(new pitPoint(getContext(),screenWidth/2, screenHeight/2));
-        myCanvas.drawCircle(screenWidth/2,screenHeight/2,20,red);
-        invalidate();
-    }
+//    public void createNewPitPoint(){
+//
+//        pitPoints.add(new pitPoint(getContext(),screenWidth/2, screenHeight/2));
+//        myCanvas.drawCircle(screenWidth/2,screenHeight/2,20,red);
+//        invalidate();
+//    }
     private void drawConnectingPath( ){
 
         if (pitPoints.size() >= 1) {
@@ -176,7 +168,6 @@ public class mCanvas extends View {
                 break;
 
             case MotionEvent.ACTION_UP:
-                mp.stop();
                 postInvalidate();
 
                 break;
@@ -208,12 +199,9 @@ public class mCanvas extends View {
                 return    Integer.valueOf(point1).compareTo(point2);         }
         });
     }
-    MediaPlayer mp;
-    private void soundEffect(){
-        mp = MediaPlayer.create(getContext(), R.raw.sound);
-        mp.start();
-}
 
 }
+
+
 
 
